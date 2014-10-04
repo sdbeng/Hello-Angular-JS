@@ -12,4 +12,18 @@ Angular contains a variety of helpful built in directives to dynamically alter w
   </div>
 </body>
   ```
-  ##foo
+  An HTML element that has the ng-if directive set on it will display if the expression ng-if is set to evaluates to true. If it evaluates to false, that element will not display.
+
+  ng-if is well suited for situations where you have two options (display one thing or another), but what if you have more than two cases? Angular's built in ng-switch directive is designed to handle this situation. If you've ever used a switch statement in JavaScript, this pattern should be familiar to you. Let's see an example:
+  ```
+  <body>
+  <input type="text" ng-model="myValue"/>
+  <div ng-switch="myValue">
+  	<div ng-switch-when="5" class="pass">You have entered 5</div>
+  	<div ng-switch-when="10" class="pass">You have entered 10</div>
+  	<div ng-switch-default class="fail">You haven't entered anything or entered something other than 5 or 10</div>
+  </div>
+</body>
+```
+
+##foo
