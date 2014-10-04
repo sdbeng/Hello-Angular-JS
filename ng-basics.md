@@ -136,4 +136,36 @@ If you play with this example, you'll see that now when you click the form tab, 
     <button ng-click="numbers.push(numbers.length);">Push</button>
 </div>
 ```
+There's a number of things going on in this code that warrant commenting. First, note that we're using HTML5 input element and setting the type equal to number (if you need a refresher on this, look here). Setting the input type to number prevents users from submitting non-numeric values in this field. AngularJS fully understands that the input is a number, and it will parse the data from this input as a number value when it assigns the value to myNumber on the scope. We're also using the HTML5 required attribute to ensure that users don't submit blank values. If you try submitting a blank value, you can see that the browser complains and asks you to supply a value.
+
+This form also uses a built in directive we haven't yet encountered: ng-submit. You can see that we've used ng-model on the first input in the form to have it bind to myNumber. The ng-submit code causes the value we've put for myNumber to be appended to our numbers array. Note that using ng-submit causes Angular to intercept the form submission event, which would normally be directed to a server. Instead, Angular collects the data and handles it locally.
+
+When you were playing with the example above, you may have noticed that when we submit a new number, although it does get pushed onto the numbers array, the value we have entered remains in the input field. The ideal behavior would be for the input to clear after the user has submitted data. We can achieve this by setting myNumber to null after it gets pushed into the numbers array. We can modify the ng-submit expression in the opening form tag so it looks like this 
+```
+<form ng-submit="numbers.push(myNumber); myNumber = null;>
+```
+```
+<body ng-init="numbers=[0,1,2,3,4,5]">
+    	<nav>
+        	<a href="#" ng-click="tab='numbers'"  ng-class="{active:tab=='numbers'}">Numbers</a>
+       		<a href="#" ng-click="tab='form'" ng-class="{active:tab=='form'}" >Form</a>
+		</nav>
+		<div ng-switch="tab">
+			<div ng-switch-when="numbers">
+				<input type="text" ng-model="myValue" /> 
+			  	<div ng-repeat="number in numbers | filter:myValue track by $index">
+			  		<h1>{{ number }}</h1>
+				</div>   
+		  	</div>
+			<div ng-switch-when="form">
+   				<form ng-submit="numbers.push(myNumber); myNumber = null; $root.tab='numbers'">
+					<input type="number" ng-model="myNumber" required />
+					<input type="submit" />
+  			    </form>
+    			<button ng-click="numbers.pop(); $root.tab='numbers'">Pop</button>
+    			<button ng-click="numbers.push(numbers.length); $root.tab='numbers'">Push</button>
+			</div>
+		</div>
+	</body>
+	```
 
