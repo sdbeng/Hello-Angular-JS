@@ -64,3 +64,32 @@ One popular feature in websites is to highlight the tab that is active. Typicall
 	</body>
 	```
 	If you play with this example, you'll see that now when you click on the numbers link, that element will get a red background, and the same is true for the form link. With ng-class, we're able to dynamically set CSS classes.
+
+	Put all together:
+	```
+	<body ng-init="numbers=[0,1,2,3,4,5]">
+    	<nav>
+        <a href="#" ng-click="tab='numbers'"  ng-class="{active:tab=='numbers'}">Numbers</a>
+        <a href="#" ng-click="tab='form'" ng-class="{active:tab=='form'}" >Form</a>
+		</nav>
+		<div ng-switch="tab">
+			<div ng-switch-when="numbers">
+				<input type="text" ng-model="myValue" /> 
+			  	<h1 ng-repeat="number in numbers | filter:myValue">{{ number }}</h1>   
+		  	</div>
+			<div ng-switch-when="form">
+			   	<button ng-click="numbers.pop(); $root.tab = 'numbers'">Pop</button>
+    			<button ng-click="numbers.push(numbers.length); $root.tab = 'numbers'">Push</button>
+			</div>
+		</div>
+	</body>
+	```
+	If you play with this example, you see that now if you click the push or pop buttons when you’re in the form tab, the app pushes or pops to the numbers list and switches view back to the numbers tab so you can see the result.
+
+It’s important to note one peculiarity in this code that you would generally avoid in a real Angular app. For the buttons we have:
+```
+<div ng-switch-when="form">
+    <button ng-click="numbers.pop(); $root.tab = 'numbers'">Pop</button>
+    <button ng-click="numbers.push(numbers.length); $root.tab = 'numbers'">Push</button>
+</div>
+```
