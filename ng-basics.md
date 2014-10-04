@@ -45,4 +45,22 @@ We can use this approach to show and hide entire tabs based on user inputs. In t
 		</div>
 	</body>
 ```
-##foo
+##Dynamically Setting CSS Classes with ng-class
+One popular feature in websites is to highlight the tab that is active. Typically this is done using a special CSS class that is applied to the element that is considered "active". In Angular, we can use the ng-class directive to accomplish this.
+```
+<body ng-init="numbers=[0,1,2,3,4,5]">
+    	<nav>
+        <a href="#" ng-click="tab='numbers'"  ng-class="{active:tab=='numbers'}">Numbers</a>
+        <a href="#" ng-click="tab='form'" ng-class="{active:tab=='form'}" >Form</a>
+		</nav>
+		<div ng-switch="tab">
+			<div ng-switch-when="numbers">
+			  <p>Numbers interface will go here!</p>    
+		  </div>
+			<div ng-switch-when="form">
+			   	<p>Form interface will go here!</p>
+			</div>
+		</div>
+	</body>
+	```
+	If you play with this example, you'll see that now when you click on the numbers link, that element will get a red background, and the same is true for the form link. With ng-class, we're able to dynamically set CSS classes.
