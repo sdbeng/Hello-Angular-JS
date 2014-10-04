@@ -26,4 +26,23 @@ Angular contains a variety of helpful built in directives to dynamically alter w
 </body>
 ```
 
+If you play with this example, you'll see that when you input 5 or 10 in the input, the expected response is displayed from the ng-switch block. If you put any other value (including putting no value at all), you'll see our default message.
+
+We can use this approach to show and hide entire tabs based on user inputs. In the next example, we'll create a page where we have two links, one for numbers and one for form. When the user clicks on numbers, a div displaying the integers in our numbers array will be rendered. When the user clicks on form, a div with a form will display where the user can input a number to filter the numbers list by. To accomplish this, we could use either ng-if or ng-switch. Let's use ng-switch for now:
+```
+<body ng-init="numbers=[0,1,2,3,4,5]">
+    	<nav>
+			<a href="#" ng-click="tab='numbers'">Numbers</a>
+			<a href="#" ng-click="tab='form'">Form</a>
+		</nav>
+		<div ng-switch="tab">
+			<div ng-switch-when="numbers">
+			  <p>Numbers interface will go here!</p>    
+		  </div>
+			<div ng-switch-when="form">
+			   	<p>Form interface will go here!</p>
+			</div>
+		</div>
+	</body>
+```
 ##foo
