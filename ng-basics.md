@@ -65,7 +65,7 @@ One popular feature in websites is to highlight the tab that is active. Typicall
 	```
 	If you play with this example, you'll see that now when you click on the numbers link, that element will get a red background, and the same is true for the form link. With ng-class, we're able to dynamically set CSS classes.
 
-	Put all together:
+	Putting all together:
 	```
 	<body ng-init="numbers=[0,1,2,3,4,5]">
     	<nav>
@@ -84,7 +84,7 @@ One popular feature in websites is to highlight the tab that is active. Typicall
 		</div>
 	</body>
 	```
-	If you play with this example, you see that now if you click the push or pop buttons when you’re in the form tab, the app pushes or pops to the numbers list and switches view back to the numbers tab so you can see the result.
+If you play with this example, you see that now if you click the push or pop buttons when you’re in the form tab, the app pushes or pops to the numbers list and switches view back to the numbers tab so you can see the result.
 
 It’s important to note one peculiarity in this code that you would generally avoid in a real Angular app. For the buttons we have:
 ```
@@ -125,7 +125,8 @@ Let's revisit the form part of the interface we were working on before. When we 
 	</body>
 </html>
 ```
-If you play with this example, you'll see that now when you click the form tab, you can input a number. If you submit the number and then click back on the numbers tab, you can see that the number you just submitted has been appended to the DOM. Let's break down what's happening the in the form. That part of the code looks like this:
+**If you play with this example, you'll see that now when you click the form tab, you can input a number. If you submit the number and then click back on the numbers tab, you can see that the number you just submitted has been appended to the DOM. Let's break down what's happening the in the form. That part of the code looks like this:
+
 ```
 <div ng-switch-when="form">
     <form ng-submit="numbers.push(myNumber); ">
@@ -141,10 +142,12 @@ There's a number of things going on in this code that warrant commenting. First,
 This form also uses a built in directive we haven't yet encountered: ng-submit. You can see that we've used ng-model on the first input in the form to have it bind to myNumber. The ng-submit code causes the value we've put for myNumber to be appended to our numbers array. Note that using ng-submit causes Angular to intercept the form submission event, which would normally be directed to a server. Instead, Angular collects the data and handles it locally.
 
 When you were playing with the example above, you may have noticed that when we submit a new number, although it does get pushed onto the numbers array, the value we have entered remains in the input field. The ideal behavior would be for the input to clear after the user has submitted data. We can achieve this by setting myNumber to null after it gets pushed into the numbers array. We can modify the ng-submit expression in the opening form tag so it looks like this 
+
 ```
 <form ng-submit="numbers.push(myNumber); myNumber = null;>
-```
-```
+
+
+
 <body ng-init="numbers=[0,1,2,3,4,5]">
     	<nav>
         	<a href="#" ng-click="tab='numbers'"  ng-class="{active:tab=='numbers'}">Numbers</a>
@@ -167,5 +170,6 @@ When you were playing with the example above, you may have noticed that when we 
 			</div>
 		</div>
 	</body>
-	```
+
+```
 
