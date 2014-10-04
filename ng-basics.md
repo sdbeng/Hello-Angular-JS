@@ -93,3 +93,47 @@ It’s important to note one peculiarity in this code that you would generally a
     <button ng-click="numbers.push(numbers.length); $root.tab = 'numbers'">Push</button>
 </div>
 ```
+The appearance of $root.tab here on both buttons is the issue. Once we’re working with modules and controllers, we’ll be able to do something like ng-click="numbers.pop(); tab='numbers'" in order to refer to our numbers scope variable.
+
+##How can we collect and store data from the user?
+Let's revisit the form part of the interface we were working on before. When we left off, we were able to pop and push to the numbers array, but we couldn't enter a number and append it to the array. We'll use ng-model along with the ng-submit directive to implement this functionality.
+```
+<!DOCTYPE html>
+<html ng-app=''>
+	<head>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+	</head>
+	<body ng-init="numbers=[0,1,2,3,4,5]">
+    	<nav>
+        	<a href="#" ng-click="tab='numbers'"  ng-class="{active:tab=='numbers'}">Numbers</a>
+       		<a href="#" ng-click="tab='form'" ng-class="{active:tab=='form'}" >Form</a>
+		</nav>
+		<div ng-switch="tab">
+			<div ng-switch-when="numbers">
+				<input type="text" ng-model="myValue" /> 
+			  	<h1 ng-repeat="number in numbers | filter:myValue track by $index">{{ number }}</h1>  
+		  	</div>
+			<div ng-switch-when="form">
+   				<form ng-submit="numbers.push(myNumber); $root.tab = 'numbers'">
+					<input type="number" ng-model="myNumber" required />
+					<input type="submit" />
+  			    </form>
+    			<button ng-click="numbers.pop();$root.tab = 'numbers'">Pop</button>
+    			<button ng-click="numbers.push(numbers.length);$root.tab = 'numbers'">Push</button>
+			</div>
+		</div>
+	</body>
+</html>
+```
+If you play with this example, you'll see that now when you click the form tab, you can input a number. If you submit the number and then click back on the numbers tab, you can see that the number you just submitted has been appended to the DOM. Let's break down what's happening the in the form. That part of the code looks like this:
+```
+<div ng-switch-when="form">
+    <form ng-submit="numbers.push(myNumber); ">
+        <input type="number" ng-model="myNumber" required />
+        <input type="submit" />
+    </form>
+    <button ng-click="numbers.pop();">Pop</button>
+    <button ng-click="numbers.push(numbers.length);">Push</button>
+</div>
+```
+
