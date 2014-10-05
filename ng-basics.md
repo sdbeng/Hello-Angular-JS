@@ -63,10 +63,10 @@ One popular feature in websites is to highlight the tab that is active. Typicall
 		</div>
 	</body>
 	```
-	If you play with this example, you'll see that now when you click on the numbers link, that element will get a red background, and the same is true for the form link. With ng-class, we're able to dynamically set CSS classes.
+If you play with this example, you'll see that now when you click on the numbers link, that element will get a red background, and the same is true for the form link. With ng-class, we're able to dynamically set CSS classes.
 
-	Putting all together:
-	```
+Putting all together:
+```
 	<body ng-init="numbers=[0,1,2,3,4,5]">
     	<nav>
         <a href="#" ng-click="tab='numbers'"  ng-class="{active:tab=='numbers'}">Numbers</a>
@@ -83,7 +83,7 @@ One popular feature in websites is to highlight the tab that is active. Typicall
 			</div>
 		</div>
 	</body>
-	```
+```
 If you play with this example, you see that now if you click the push or pop buttons when you’re in the form tab, the app pushes or pops to the numbers list and switches view back to the numbers tab so you can see the result.
 
 It’s important to note one peculiarity in this code that you would generally avoid in a real Angular app. For the buttons we have:
@@ -125,7 +125,7 @@ Let's revisit the form part of the interface we were working on before. When we 
 	</body>
 </html>
 ```
-**If you play with this example, you'll see that now when you click the form tab, you can input a number. If you submit the number and then click back on the numbers tab, you can see that the number you just submitted has been appended to the DOM. Let's break down what's happening the in the form. That part of the code looks like this:
+If you play with this example, you'll see that now when you click the form tab, you can input a number. If you submit the number and then click back on the numbers tab, you can see that the number you just submitted has been appended to the DOM. Let's break down what's happening the in the form. That part of the code looks like this:
 
 ```
 <div ng-switch-when="form">
@@ -145,8 +145,6 @@ When you were playing with the example above, you may have noticed that when we 
 
 ```
 <form ng-submit="numbers.push(myNumber); myNumber = null;>
-
-
 
 <body ng-init="numbers=[0,1,2,3,4,5]">
     	<nav>
@@ -169,7 +167,7 @@ When you were playing with the example above, you may have noticed that when we 
     			<button ng-click="numbers.push(numbers.length); $root.tab='numbers'">Push</button>
 			</div>
 		</div>
-	</body>
+</body>
 
 ```
-
+##cont.soon
